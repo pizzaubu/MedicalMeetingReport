@@ -2,12 +2,35 @@
 {% load static %}
 
 {% block content %}
+<section class="section-conten padding-y" style="min-height:84vh"></section>
 <div class="container">
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Login</button>
-  </form>
+  <div class="row">
+    <div class="offset-4 col-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">เข้าสู่ระบบ</h4>
+          <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            {% for field in login_forms.visible_fields %}
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label class="form-label" for="">{{field.label}}</label>
+                            {{field}}
+                            {% for error in field.errors %}
+                                <span>{{error}}</span>
+                            {% endfor %}
+                    </div>  
+                </div>
+            {% endfor %}
+              <div class="row">
+                  <div class="col-12">
+                      <button type="submit" class="btn btn-primary btn-block"> เข้าสู่ระบบ </button>
+                  </div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

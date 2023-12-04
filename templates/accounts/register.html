@@ -2,12 +2,31 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-  <h2>Register</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Register</button>
-  </form>
-</div>
+<section class="section-content padding-y">
+  <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+    <article class="card-body">
+      <header class="mb-4"><h4 class="card-title">ลงทะเบียน</h4></header>
+      <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+          <div class="row mb-3">
+            <div class="col-12">
+              <label class="form-label" for="">{{field.label}}</label>
+                {{field}}
+                {% for error in field.errors %}
+                  <span>{{error}}</span>
+                {% endfor %}
+              </div>  
+          </div>
+          {% endfor %}
+          <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-block"> ลงทะเบียน </button>
+            </div>
+          </div>
+      </form>
+    </article>
+  </div>
+  <p class="text-center mt-4">มีบัญชีแล้วหรือยัง? <a href="{% url 'login' %}">เข้าสู่ระบบ</a></p>
+</section>
 {% endblock %}

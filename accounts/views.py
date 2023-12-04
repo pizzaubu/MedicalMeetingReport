@@ -29,7 +29,5 @@ def user_register(request):
         form = UserRegistrationForm()
     return render(request, 'accounts/register.html', {'form': form})
 
-@login_required
-def home(request):
-    return render(request, 'home.html')
+
 
