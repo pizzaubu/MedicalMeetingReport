@@ -1,0 +1,50 @@
+{% extend 'base.html' %}
+{% block content %}
+<section  class="section-content padding-y bg">
+    <div class="container">
+        <div class="row">
+            <aside class="col-md-3">
+                <!-- SideBar -->
+                <ul class="list-group">
+                    <a class="list-group-item active" href="#"> Dashboard </a>
+                    <a class="list-group-item" href="#"> การตั้งค่า </a>
+                    <a class="list-group-item" href="#"> เปลี่ยนรหัสผ่าน </a>
+                </ul>
+            </aside>
+            <main  class="col-md-9">
+                <article>
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3"></strong>
+                        <span>โปรไฟล์ของฉัน</span>
+                    </header>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <strong>หัวข้อการประชุม:</strong>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>สถานที่การประชุม:</strong>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>ไฟล์:</strong>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>รายชื่อผู้เข้าร่วมการประชุม:</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="offset-2 col-4">
+                                <div class="">
+                                  <img src="#" alt="Profile Picture" id="profile-preview" class="img-fluid rounded-circle" style="max-width: 200px; max-height: 200px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+</section>
+{% endblock %}
