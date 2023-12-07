@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'backoffices',
     'listviews',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
