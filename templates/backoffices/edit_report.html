@@ -1,0 +1,16 @@
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <h2>Edit Report</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ReportForm
 
 def upload_report(request):
@@ -10,3 +10,19 @@ def upload_report(request):
     else:
         form = ReportForm()
     return render(request, 'upload_report.html', {'form': form})
+
+
+def edit_report(request, report_id):
+    report = get_object_or_404(Report, pk=report_id)
+    if request.method == 'POST':
+        form = ReportForm(request.POST, request.FILES, instance=report)
+        if form.is_valid():
+            # ลบไฟล์เก่าถ้ามีการอัปโหลดไฟล์ใหม่
+            if 'file' in request.FILES:
+                if report.file:
+                    report.file.delete()
+            form.save()
+            return redirect('some_view_to_redirect_after_editing')
+    else:
+        form = ReportForm(instance=report)
+    return render(request, 'edit_report.html', {'form': form, 'report': report})
