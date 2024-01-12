@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .forms import UserLoginForm, UserRegistrationForm
+from .forms import UserLoginForm, UserRegistrationForm, AdminLoginForm
 
 def user_login(request):
     if request.method == 'POST':
