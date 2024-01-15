@@ -27,3 +27,7 @@ def edit_report(request, report_id):
     else:
         form = ReportForm(instance=report)
     return render(request, 'listviews/edit_report.html', {'form': form, 'report': report})
+
+def view_reports(request):
+    reports = Report.objects.all()
+    return render(request, 'listviews/view_reports.html', {'reports': reports})

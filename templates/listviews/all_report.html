@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <h2>รายงานทั้งหมด</h2>
+        <div class="list-reports">
+            {% for report in reports %}
+                <div class="report">
+                    <h3>{{ report.header }}</h3>
+                    <p>ID: {{ report.report_id }}</p>
+                    <a href="{{ report.file.url }}">Download</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
