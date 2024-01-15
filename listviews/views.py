@@ -7,7 +7,7 @@ def upload_report(request):
         form = ReportForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return render(request, 'upload_success.html')
+            return render(request, 'upload_report.html')
     else:
         form = ReportForm()
     return render(request, 'listviews/upload_report.html', {'form': form})
@@ -23,7 +23,7 @@ def edit_report(request, report_id):
                 if report.file:
                     report.file.delete()
             form.save()
-            return redirect('some_view_to_redirect_after_editing')
+            return redirect('edit_report.html')
     else:
         form = ReportForm(instance=report)
     return render(request, 'listviews/edit_report.html', {'form': form, 'report': report})
