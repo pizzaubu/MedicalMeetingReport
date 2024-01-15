@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm
+from .forms import AdminLoginForms
 from accounts.models import User
 
 # Create your views here.
 
 def admin_login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = AdminLoginForms(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -20,6 +20,6 @@ def admin_login(request):
                 # Handle login error
                 return render(request, 'login.html', {'form': form, 'error': 'Invalid credentials or not an admin.'})
     else:
-        form = LoginForm()
+        form = AdminLoginForms()
 
     return render(request, 'login.html', {'form': form})
