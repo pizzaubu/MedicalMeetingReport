@@ -3,6 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import UserLoginForm, UserRegistrationForm
+from .models import UserManager
 
 def user_login(request):
     if request.method == 'POST':
@@ -29,5 +30,16 @@ def user_register(request):
         form = UserRegistrationForm()
     return render(request, 'accounts/register.html', {'form': form})
 
+def reset_password_request(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        new_password = request.POST.get('new_password')
+        try:
+            UserManager().reset_password(email, new_password)
+            return redirect('login')  # หรือหน้าอื่นที่เหมาะสม
+        except ValueError as e:
+            return render(request, 'reset_password.html', {'error': str(e)})
+
+    return render(request, 'accounts/reset_password.html')
 
 

@@ -15,6 +15,14 @@ class UserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
+    
+    def reset_password(self, email, new_password):
+        user = self.model.objects.filter(email=self.normalize_email(email)).first()
+        if not user:
+            raise ValueError('No user with this email address')
+        user.set_password(new_password)
+        user.save(using=self._db)
+        return user
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=100, unique=True)
