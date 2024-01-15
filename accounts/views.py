@@ -30,7 +30,7 @@ def user_register(request):
         form = UserRegistrationForm()
     return render(request, 'accounts/register.html', {'form': form})
 
-def reset_password_request(request):
+def reset_password(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         new_password = request.POST.get('new_password')
