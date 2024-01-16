@@ -1,45 +1,33 @@
-{% extends 'base.html' %} {% load static %} 
-
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-
-<section class="section-conten padding-y" style="min-height:84vh">
-    <div class="container">
-<!-- ============================ COMPONENT LOGIN   ================================= -->
-
-        <div class="row" >
-            <div class="offset-4 col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title mb-4">เข้าสู่ระบบ</h4>
-                        {% include 'includes/alerts.html' %}
-                        <form action="{% url 'login' %}" method="POST">
-                            {% csrf_token %}
-                            {% for field in login_forms.visible_fields %}
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <label class="form-label" for="">{{field.label}}</label>
-                                            {{field}}
-                                            {% for error in field.errors %}
-                                                <span>{{error}}</span>
-                                            {% endfor %}
-                                    </div>  
-                                </div>
-                            {% endfor %}
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-block"> เข้าสู่ระบบ </button>
-                                </div>
-                            </div> <!-- form-group// -->
-                        </form>
-                    </div> <!-- card-body.// -->
-                </div>
-                <p class="text-center mt-4">ยังไม่มีบัญชี? <a href="{% url 'register' %}">สมัครสมาชิก</a></p>
-            </div> <!-- card .// -->
-        </div>
-
-            
-<!-- ============================ COMPONENT LOGIN  END.// ================================= -->
-    </div>
+<section class="section-content padding-y">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-4">เข้าสู่ระบบ</h4>
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                {% for field in form.visible_fields %}
+                    <div class="form-group">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary btn-block">เข้าสู่ระบบ</button>
+            </form>
+          </div> <!-- card-body -->
+        </div> <!-- card -->
+        <p class="text-center mt-4">ยังไม่มีบัญชี? <a href="{% url 'register' %}">สมัครสมาชิก</a></p>
+      </div> <!-- col -->
+    </div> <!-- row -->
+  </div> <!-- container -->
 </section>
 {% endblock %}
+
