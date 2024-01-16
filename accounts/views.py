@@ -14,7 +14,7 @@ def user_login(request):
             user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
-                return redirect('home')  # สามารถเปลี่ยน URL ไปยังหน้าหลักของคุณได้
+                return redirect('home')  
     else:
         form = UserLoginForm()
     return render(request, 'accounts/login.html', {'form': form})
@@ -25,7 +25,7 @@ def user_register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')  # สามารถเปลี่ยน URL ไปยังหน้าหลักของคุณได้
+            return redirect('user_login')  
     else:
         form = UserRegistrationForm()
     return render(request, 'accounts/register.html', {'form': form})
@@ -36,7 +36,7 @@ def reset_password(request):
         new_password = request.POST.get('new_password')
         try:
             UserManager().reset_password(email, new_password)
-            return redirect('login')  # หรือหน้าอื่นที่เหมาะสม
+            return redirect('login')  
         except ValueError as e:
             return render(request, 'reset_password.html', {'error': str(e)})
 

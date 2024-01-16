@@ -27,3 +27,7 @@ class UserLoginForm(forms.Form):
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'รหัสผ่าน'})
     )
 
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
