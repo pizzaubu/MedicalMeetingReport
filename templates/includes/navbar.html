@@ -1,27 +1,45 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">MMR</a>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+<!-- Using the latest Bootstrap version (v5.3) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img class="logo" src="{% static 'image/logo.png' %}" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-bars"></i> เอกสารทั้งหมด
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <!--<li><a class="dropdown-item" href="{% url 'store' %}">สินค้าทั้งหมด</a></li>
+            {% for category in links %}
+              <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+            {% endfor %}-->
+          </ul>
+        </li>
+      </ul>
+      <!--<form action="{% url 'search' %}" class="d-flex search" method="GET">
+        <input class="form-control me-2" type="search" placeholder="ค้นหา" aria-label="Search" name="keyword">
+        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+      </form>-->
+      <div class="d-flex">
+        {% if user.id is None %}
+          <div class="mx-2">
+            <small class="title text-muted">ยินดีต้อนรับ แขกผู้มาเยือน!</small><br>
+            <a href="{% url 'login' %}">เข้าสู่ระบบ</a> | <a href="{% url 'register' %}"> สมัครสมาชิก</a>
+          </div>
+        {% else %}
+          <div class="mx-2">
+            <small class="title text-muted">ยินดีต้อนรับ {{user.first_name}}!</small><br>
+            <a href="{% url 'dashboard' %}">แดชบอร์ด</a> | <a href="{% url 'logout' %}"> ออกจากระบบ</a>
+          </div>
+        {% endif %}
       </div>
     </div>
+  </div>
 </nav>

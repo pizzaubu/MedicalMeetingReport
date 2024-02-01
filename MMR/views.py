@@ -1,6 +1,13 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from listviews.models import Report
 
-@login_required
+
 def home(request):
-    return render(request, 'home.html')
+    reports = Report.objects.all().filter(is_available=True)
+    print(reports)
+
+    context = {
+        'reports': reports,
+        #'reports': [],
+    }
+    return render(request, 'home.html', context)
